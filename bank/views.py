@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("<h1>Bank Home</h1>")
+    return render(request, 'bank/home.html')
 
 def account(request):
-    return HttpResponse("<h1>Bank Account</h1>")
+    return render(request, 'bank/account.html', {"title": "account"})
