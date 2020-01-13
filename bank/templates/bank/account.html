@@ -1,4 +1,12 @@
 {% extends "bank/base.html" %}
+{% load static %}
 {% block content %}
     <h1>Bank Account</h1>
+    <img src="{% static 'bank/card-logo.svg' %}" alt="logo" class="img-fluid rounded mx-auto d-block">
+
+    {% if user.is_authenticated %}
+        <p>Hello {{ user}} </p>
+    {% else %}
+        <p>You are not logged in. <a href="{% url 'users-login' %}">Sign in here</a></p>
+    {% endif %}
 {% endblock %}
