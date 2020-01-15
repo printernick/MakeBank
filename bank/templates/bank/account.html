@@ -1,12 +1,105 @@
 {% extends "bank/base.html" %}
 {% load static %}
 {% block content %}
-    <h1>Bank Account</h1>
-    <img src="{% static 'bank/card-logo.svg' %}" alt="logo" class="img-fluid rounded mx-auto d-block">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'bank/card-logo.svg' %}" alt="logo" class="icon">
+        </a>
+        <a href="{% url 'users-logout' %}">
+            <button type="button" class="btn btn-secondary">Logout</button>
+        </a>
+    </nav>
 
-    {% if user.is_authenticated %}
-        <p>Hello {{ user}} </p>
-    {% else %}
-        <p>You are not logged in. <a href="{% url 'users-login' %}">Sign in here</a></p>
-    {% endif %}
+    <h1 class="display-1 p-2">Welcome {{ user.first_name }}</h1>
+
+    <div class="accordion mt-3" id="productsContainer">
+        <div class="card">
+            <div class="card-header bg-success" id="headingSavings">
+                <h2 class="mb-0">
+                    <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#collapseSavings" aria-expanded="false" aria-controls="collapseSavings">
+                        Savings
+                    </button>
+                </h2>
+            </div>
+      
+            <div id="collapseSavings" class="collapse" aria-labelledby="headingSavings" data-parent="#productsContainer">
+                <div class="card-body">
+                    {% if savings %}
+                        {% for product in savings %}
+                            {{ product }}
+                        {% endfor %}
+                    {% else %}
+                        Add a savings product.
+                    {% endif %}
+                </div>
+            </div>
+        </div> <!-- End Card -->
+
+        <div class="card">
+            <div class="card-header bg-danger" id="headingChecking">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed text-light" type="button" data-toggle="collapse" data-target="#collapseChecking" aria-expanded="false" aria-controls="collapseChecking">
+                        Checking
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseChecking" class="collapse" aria-labelledby="headingChecking" data-parent="#productsContainer">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div> <!-- End Card -->
+
+        <div class="card">
+            <div class="card-header bg-warning" id="headingMoneyMarket">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed text-light" type="button" data-toggle="collapse" data-target="#collapseMoneyMarket" aria-expanded="false" aria-controls="collapseMoneyMarket">
+                        Money Market
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseMoneyMarket" class="collapse" aria-labelledby="headingMoneyMarket" data-parent="#productsContainer">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div> <!-- End Card -->
+
+        <div class="card">
+            <div class="card-header bg-info" id="headingCD">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed text-light" type="button" data-toggle="collapse" data-target="#collapseCD" aria-expanded="false" aria-controls="collapseCD">
+                        CD
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseCD" class="collapse" aria-labelledby="headingCD" data-parent="#productsContainer">
+                <div class="card-body">
+                    {% if CD %}
+                        {% for product in CD %}
+                            {{ product }}
+                        {% endfor %}
+                    {% else %}
+                        Add a CD product.
+                    {% endif %}
+                </div>
+            </div>
+        </div> <!-- End Card -->
+
+        <div class="card">
+            <div class="card-header bg-secondary" id="headingIRA_CD">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed text-light" type="button" data-toggle="collapse" data-target="#collapseIRA_CD" aria-expanded="false" aria-controls="collapseIRA_CD">
+                        IRA CD
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseIRA_CD" class="collapse" aria-labelledby="headingIRA_CD" data-parent="#productsContainer">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div> <!-- End Card -->
+
+    </div> <!-- end accordion -->
 {% endblock %}

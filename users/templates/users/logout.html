@@ -1,0 +1,9 @@
+{% extends "bank/base.html" %}
+{% block content %}
+        <h2>Logout Successful</h2>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a href="{% url 'users-login' %}">Sign In</a>
+            </small>
+        </div>
+{% endblock %}
