@@ -19,8 +19,12 @@ class Product(models.Model):
         max_length = 2,
         choices=PRODUCT_CHOICES
     )
-    money = models.IntegerField()
+    money = models.DecimalField(max_digits=19, decimal_places=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.user.username}: {self.product_type} - {self.money}'
+
+class Document(models.Model):
+    file = models.FileField(upload_to='documents')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

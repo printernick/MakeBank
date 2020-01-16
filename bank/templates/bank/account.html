@@ -1,4 +1,5 @@
 {% extends "bank/base.html" %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
@@ -11,7 +12,7 @@
     </nav>
 
     <h1 class="display-1 p-2">Welcome {{ user.first_name }}</h1>
-
+    
     <div class="accordion mt-3" id="productsContainer">
         <div class="card">
             <div class="card-header bg-success" id="headingSavings">
@@ -24,13 +25,25 @@
       
             <div id="collapseSavings" class="collapse" aria-labelledby="headingSavings" data-parent="#productsContainer">
                 <div class="card-body">
-                    {% if savings %}
-                        {% for product in savings %}
-                            {{ product }}
-                        {% endfor %}
-                    {% else %}
-                        Add a savings product.
-                    {% endif %}
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>ID</th>
+                                <th>Balance</th>
+                            </tr>
+                            {% if savings %}
+                                {% for product in savings %}
+                                    <tr>
+                                        <td>{{ product.id }}</td>
+                                        <td>${{ product.money }}</td>
+                                    </tr>
+                                    
+                                {% endfor %}
+                            {% else %}
+                                Add a savings product.
+                            {% endif %}
+                        </table>
+                    </div>
                 </div>
             </div>
         </div> <!-- End Card -->
@@ -102,4 +115,15 @@
         </div> <!-- End Card -->
 
     </div> <!-- end accordion -->
+
+    <form class="mt-3" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Upload documents</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Upload</button>
+        </div>
+    </form>
 {% endblock %}
