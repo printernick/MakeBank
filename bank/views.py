@@ -42,16 +42,14 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        if form.instance.product_type == "SV":
-            print("it's a savings product")
-        elif form.instance.product_type == "CH":
-            pass
-        elif form.instance.product_type == "MM":
-            pass
-        elif form.instance.product_type == "CD":
-            pass
-        elif form.instance.product_type == "IC":
-            pass
+        if ((form.instance.product_type == "SV" and form.instance.money < 500)
+            or (form.instance.product_type == "CH" and form.instance.money < 100)
+            or (form.instance.product_type == "MM" and form.instance.money < 1000)
+            or (form.instance.product_type == "CD" and form.instance.money < 1)
+            or (form.instance.product_type == "IC" and form.instance.money < 1000)):
+
+            messages.warning(self.request, "Below minimum balance")
+            return self.render_to_response(self.get_context_data(form=form))
         return super().form_valid(form)
     
     def get_success_url(self):
@@ -59,8 +57,6 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
 @login_required
 def account(request):
-    
-
     savings = Product.objects.filter(user=request.user, product_type = "SV")
     checking = Product.objects.filter(user=request.user, product_type = "CH")
     money_market = Product.objects.filter(user=request.user, product_type = "MM")
@@ -75,5 +71,4 @@ def account(request):
         "CD": CD,
         "IRA_CD": IRA_CD,
     }
-    # print(request.user._meta.get_fields())
     return render(request, 'bank/account.html', context)

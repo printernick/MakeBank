@@ -53,7 +53,29 @@
             </div>
             <div id="collapseChecking" class="collapse" aria-labelledby="headingChecking" data-parent="#productsContainer">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    {% if checking %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Balance</th>
+                                </tr>
+                                {% for product in checking %}
+                                    <tr>
+                                        <td>{{ product.id }}</td>
+                                        <td>${{ product.money }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    {% else %}
+                        <p>No checking products open.</p>
+                    {% endif %}
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Want a new product?  <a href="{% url 'product-create' %}" class="ml-2">Add here</a>
+                        </small>
+                    </div>
                 </div>
             </div>
         </div> <!-- End Card -->
@@ -68,7 +90,29 @@
             </div>
             <div id="collapseMoneyMarket" class="collapse" aria-labelledby="headingMoneyMarket" data-parent="#productsContainer">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    {% if money_market %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Balance</th>
+                                </tr>
+                                {% for product in money_market %}
+                                    <tr>
+                                        <td>{{ product.id }}</td>
+                                        <td>${{ product.money }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    {% else %}
+                        <p>No money market products open.</p>
+                    {% endif %}
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Want a new product?  <a href="{% url 'product-create' %}" class="ml-2">Add here</a>
+                        </small>
+                    </div>
                 </div>
             </div>
         </div> <!-- End Card -->
@@ -84,12 +128,28 @@
             <div id="collapseCD" class="collapse" aria-labelledby="headingCD" data-parent="#productsContainer">
                 <div class="card-body">
                     {% if CD %}
-                        {% for product in CD %}
-                            {{ product }}
-                        {% endfor %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Balance</th>
+                                </tr>
+                                {% for product in CD %}
+                                    <tr>
+                                        <td>{{ product.id }}</td>
+                                        <td>${{ product.money }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
                     {% else %}
-                        Add a CD product.
+                        <p>No CD products open.</p>
                     {% endif %}
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Want a new product?  <a href="{% url 'product-create' %}" class="ml-2">Add here</a>
+                        </small>
+                    </div>
                 </div>
             </div>
         </div> <!-- End Card -->
@@ -104,7 +164,29 @@
             </div>
             <div id="collapseIRA_CD" class="collapse" aria-labelledby="headingIRA_CD" data-parent="#productsContainer">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    {% if IRA_CD %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Balance</th>
+                                </tr>
+                                {% for product in IRA_CD %}
+                                    <tr>
+                                        <td>{{ product.id }}</td>
+                                        <td>${{ product.money }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    {% else %}
+                        <p>No IRA CD products open.</p>
+                    {% endif %}
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Want a new product?  <a href="{% url 'product-create' %}" class="ml-2">Add here</a>
+                        </small>
+                    </div>
                 </div>
             </div>
         </div> <!-- End Card -->
