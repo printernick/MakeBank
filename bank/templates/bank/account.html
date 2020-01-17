@@ -1,16 +1,7 @@
-{% extends "bank/base.html" %}
+{% extends "bank/bank-base.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
-{% block content %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
-        <a class="navbar-brand" href="#">
-            <img src="{% static 'bank/card-logo.svg' %}" alt="logo" class="icon">
-        </a>
-        <a href="{% url 'users-logout' %}">
-            <button type="button" class="btn btn-secondary">Logout</button>
-        </a>
-    </nav>
-
+{% block content2 %}
     <h1 class="display-1 p-2">Welcome {{ user.first_name }}</h1>
     
     <div class="accordion mt-3" id="productsContainer">
@@ -25,24 +16,28 @@
       
             <div id="collapseSavings" class="collapse" aria-labelledby="headingSavings" data-parent="#productsContainer">
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr>
-                                <th>ID</th>
-                                <th>Balance</th>
-                            </tr>
-                            {% if savings %}
+                    {% if savings %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Balance</th>
+                                </tr>
                                 {% for product in savings %}
                                     <tr>
                                         <td>{{ product.id }}</td>
                                         <td>${{ product.money }}</td>
                                     </tr>
-                                    
                                 {% endfor %}
-                            {% else %}
-                                Add a savings product.
-                            {% endif %}
-                        </table>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p>No savings products open.</p>
+                    {% endif %}
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Want a new product?  <a href="{% url 'product-create' %}" class="ml-2">Add here</a>
+                        </small>
                     </div>
                 </div>
             </div>
@@ -116,14 +111,5 @@
 
     </div> <!-- end accordion -->
 
-    <form class="mt-3" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Upload documents</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Upload</button>
-        </div>
-    </form>
+
 {% endblock %}

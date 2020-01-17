@@ -12,4 +12,13 @@ class UserRegisterForm(UserCreationForm):
         fields = ["username", "email", "first_name", "last_name", "password1", "password2"]
 
 class UploadFileForm(forms.Form):
-    file = forms.FileField()
+    file = forms.FileField(label="Upload Document", required=False)
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
+
+    class Meta:
+        model = User
+        fields = ["username", "email", "first_name", "last_name"]

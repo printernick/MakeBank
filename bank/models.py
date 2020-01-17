@@ -26,5 +26,8 @@ class Product(models.Model):
         return f'{self.user.username}: {self.product_type} - {self.money}'
 
 class Document(models.Model):
-    file = models.FileField(upload_to='documents')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    file = models.FileField(upload_to=f'documents')
+
+    def __str__(self):
+        return f'{self.user.username}: {self.file}'
